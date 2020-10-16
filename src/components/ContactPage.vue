@@ -14,10 +14,10 @@
       <button type="button" @click="undo" class="contact--undo">Redo</button>
     </div>
     <div class="contact--bottom">
-      <ul>
+      <ul class="contact--field-list">
         <ContactPageField
           v-for="(field, index) in currentContact.fields"
-          :key="index + field + (Math.random() + 1 *100)"
+          :key="index + field + (Math.random() + 1 * 100)"
           :fieldName="index"
           :fieldValue="field"
           :contactId="`${currentContact.id}`"
@@ -35,7 +35,7 @@ import { mapActions } from "vuex";
 
 export default {
   computed: {
-    currentContact() {
+    currentContact() { // С помощью id узнаём конкретный id и отправляем его данные в компонент
       const id = this.$route.params.id;
       return this.$store.getters.getCurrentContact(id);
     }
@@ -44,7 +44,7 @@ export default {
     backToContacts() {
       this.$router.push("/");
     },
-    ...mapActions(["undo"])
+    ...mapActions(["undo"]) // Импортируем метод отмены предыдущего шага
   },
   components: {
     ContactPageField,
@@ -82,6 +82,7 @@ export default {
 }
 
 .contact--prev {
+  user-select: none;
   border: 0;
   font-size: 0;
   background-color: inherit;
@@ -93,10 +94,20 @@ export default {
   left: 20px;
   top: 20px;
 
+  cursor: pointer;
+
   background: url("/images/left-arrow.svg");
 }
 
+.contact--prev:hover,
+.contact--prev:active,
+.contact--prev:focus {
+  transform: translateX(-10px);
+  transition: 0.6s;
+}
+
 .contact--undo {
+  user-select: none;
   border: 0;
   font-size: 0;
   background-color: inherit;
@@ -108,11 +119,35 @@ export default {
   right: 20px;
   top: 20px;
 
+  cursor: pointer;
+
   background: url("/images/undo.svg");
   background-repeat: no-repeat;
 }
 
+.contact--undo:hover,
+.contact--undo:active,
+.contact--undo:focus {
+  transform: rotate(-360deg);
+  transition: 0.6s;
+}
+
 .contact img {
   height: 300px;
+}
+
+@media (max-width: 550px) {
+  .contact {
+    width: 320px;
+    padding: 0;
+  }
+
+  .contact img {
+    height: 200px;
+  }
+
+  .contact--field-list {
+    padding: 0;
+  }
 }
 </style>

@@ -1,18 +1,19 @@
 <template>
   <li class="contact--field">
-    <h3>{{ fieldName }} :</h3>
+    <div class="field--info">
+      <h3>{{ fieldName }} :</h3>
 
-    <p v-if="!isEditMode">{{ fieldValue }}</p>
-    <input
-      v-else
-      v-model="newFieldValue"
-      type="text"
-      name="editValue"
-      class="edit--input"
-      :placeholder="fieldValue"
-      autofocus
-    />
-
+      <p v-if="!isEditMode">{{ fieldValue }}</p>
+      <input
+        v-else
+        v-model="newFieldValue"
+        type="text"
+        name="editValue"
+        class="edit--input"
+        :placeholder="fieldValue"
+        autofocus
+      />
+    </div>
     <div v-if="!isEditMode" class="field--buttons">
       <button @click="switchEditMode" type="button" class="field--edit">
         Edit
@@ -51,7 +52,7 @@ export default {
     contactId: String
   },
   methods: {
-    deleteField() {
+    deleteField() { //Удаляем форму с подтверждением
       if (confirm("Вы действительно хотите удалить это поле")) {
         this.$store.dispatch("deleteField", {
           fieldName: this.fieldName,
@@ -59,7 +60,7 @@ export default {
         });
       }
     },
-    changeField() {
+    changeField() { // Изменяем форму, предворительно проверяя на присутствие данных
       if (!this.newFieldValue) {
         alert("Пожалуйтса введите хоть что-то");
         return;
@@ -74,7 +75,7 @@ export default {
     switchEditMode() {
       this.isEditMode = !this.isEditMode;
     },
-    swithEditModeInner() {
+    swithEditModeInner() {  // Отдельное переключение формы для режима редактирования, сделанно по ТЗ
       if (confirm("Вы действительно хотите выйти из режима редактирования")) {
         this.isEditMode = !this.isEditMode;
       }
@@ -100,9 +101,13 @@ export default {
 }
 
 .contact--field:hover {
-  /* transition: 0.4s; */
+  transition: 0.4s;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+}
+
+.field--info {
+  display: flex;
 }
 
 .field--buttons {
@@ -124,11 +129,19 @@ export default {
 }
 
 .field--edit {
+  cursor: pointer;
   width: 20px;
   height: 20px;
   background-image: url("../../public/images/edit.svg");
 
   margin-right: 25px;
+}
+
+.field--edit:hover,
+.field--edit:active,
+.field--edit:focus {
+  transition: 0.4s;
+  transform: scale(1.2);
 }
 
 .field--delete {
@@ -138,6 +151,13 @@ export default {
   height: 20px;
 
   margin-right: 10px;
+}
+
+.field--delete:hover,
+.field--delete:active,
+.field--delete:focus {
+  transition: 0.4s;
+  transform: rotate(180deg);
 }
 
 .field--delete::before,
@@ -175,6 +195,8 @@ export default {
 
 .edit--buttons button {
   border: 0;
+  cursor: pointer;
+  user-select: none;
   background-color: inherit;
   position: relative;
 }
@@ -186,9 +208,23 @@ export default {
   margin-right: 30px;
 }
 
+.edit-btn--cancel:hover,
+.edit-btn--cancel:active,
+.edit-btn--cancel:focus {
+  transition: 0.4s;
+  transform: rotate(180deg);
+}
+
 .edit-btn--submit {
   width: 20px;
   height: 20px;
+}
+
+.edit-btn--submit:hover,
+.edit-btn--submit:active,
+.edit-btn--submit:focus {
+  transition: 0.4s;
+  transform: scale(1.2);
 }
 
 .edit-btn--cancel::before,
@@ -230,5 +266,45 @@ export default {
 
   left: -5px;
   top: 11px;
+}
+
+@media (max-width: 550px) {
+  .contact--field {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .field--info {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .field--info h3 {
+    margin-bottom: 0;
+    margin-right: 0;
+
+    margin-top: 0px;
+    padding-top: 10px;
+  }
+
+  .field--info p {
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  .field--buttons {
+    margin: 0 auto;
+    margin-top: 0;
+
+    margin-bottom: 20px;
+  }
+
+  .edit--buttons {
+    margin: 0 auto;
+    margin-top: 20px;
+
+    margin-bottom: 20px;
+  }
 }
 </style>

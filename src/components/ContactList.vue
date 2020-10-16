@@ -20,7 +20,7 @@ import ContactItem from "./ContactItem";
 import ContactAddNew from "./ContactAddNew";
 
 export default {
-  computed: {
+  computed: { // Получаем из стора все контакты и обрабатываем их
     getAllContacts() {
       return this.$store.getters.getAllContacts;
     }
@@ -34,6 +34,7 @@ export default {
 
 <style scoped>
 .contacts {
+  width: 900px;
   padding: 20px;
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -55,9 +56,22 @@ export default {
 }
 
 .empty-contact-list {
-  width: 800px;
   text-align: center;
 
   color: rgb(139, 139, 139);
+}
+
+@media (max-width: 950px) {
+  .contacts {
+    width: 500px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contacts {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }
 </style>

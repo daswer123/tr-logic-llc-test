@@ -62,7 +62,7 @@ export default {
         fieldName: this.fieldName,
         fieldValue: this.fieldValue
       });
-      
+
       this.isActive = !this.isActive;
       this.fieldName = "";
       this.fieldValue = "";
@@ -100,6 +100,13 @@ export default {
   color: rgb(139, 139, 139);
   border: 0;
   background-color: inherit;
+}
+
+.contacts--add-new:focus,
+.contacts--add-new:hover,
+.contacts--add-new:active {
+  transition: 0.5s;
+  transform: scale(1.2);
 }
 
 .contacts--add-new::before,
@@ -141,14 +148,24 @@ export default {
   padding-bottom: 10px;
   border: 1px solid rgb(212, 210, 210);
 }
+.contacts--input-label input:focus,
+.contacts--input-label input:hover,
+.contacts--input-label input:active {
+  transition: 0.5s;
+  border: 1px solid grey;
+}
 
 .contacts--action-btn {
   margin-left: auto;
   margin-right: 20px;
+
+  margin-top: 10px;
 }
 
 .contacts--action-btn button {
   border: 0;
+  cursor: pointer;
+  user-select: none;
   background-color: inherit;
   position: relative;
 }
@@ -160,9 +177,23 @@ export default {
   margin-right: 30px;
 }
 
+.action-btn--cancel:hover,
+.action-btn--cancel:active,
+.action-btn--cancel:focus {
+  transition: 0.4s;
+  transform: rotate(180deg);
+}
+
 .action-btn--submit {
   width: 20px;
   height: 20px;
+}
+
+.action-btn--submit:hover,
+.action-btn--submit:active,
+.action-btn--submit:focus {
+  transition: 0.4s;
+  transform: scale(1.2);
 }
 
 .action-btn--cancel::before,
@@ -204,5 +235,21 @@ export default {
 
   left: -5px;
   top: 11px;
+}
+
+@media (max-width: 550px) {
+  .contacts--create-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contacts--create-form input {
+    margin-bottom: 10px;
+  }
+
+  .contacts--action-btn {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
 }
 </style>

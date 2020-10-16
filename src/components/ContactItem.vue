@@ -2,8 +2,10 @@
   <li class="contacts--item">
     <router-link :to="{ path: `/contact/${data.id}` }">
       <img class="contacts--img" alt="Contact avatar" :src="data.avatarUrl" />
-      <h2 class="contacts--name">{{ data.name }}</h2>
-      <p class="contacts--number">{{ data.phone }}</p>
+      <div class="contacts--info">
+        <h2 class="contacts--name">{{ data.name }}</h2>
+        <p class="contacts--number">{{ data.phone }}</p>
+      </div>
       <button
         @click.prevent="deleteContact(data.id)"
         type="button"
@@ -22,8 +24,7 @@ export default {
   },
   methods: {
     deleteContact(id) {
-      if (confirm("Вы действительно хотите удалить пользователя из своих контактов"))
-      {
+      if (confirm("Вы действительно хотите удалить пользователя из своих контактов")) { // Удаляем контакт с подтверждением
         this.$store.dispatch("deleteContact", id);
       }
     }
@@ -33,7 +34,6 @@ export default {
 
 <style scoped>
 .contacts--item a {
-  width: 800px;
   display: flex;
   text-decoration: none;
   color: black;
@@ -47,6 +47,14 @@ export default {
 
 .contacts--item:last-child a {
   border: 0;
+}
+
+.contacts--item a:hover,
+.contacts--item a:active,
+.contacts--item a:focus {
+  transition: 0.4s;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
 
 .contacts--img {
@@ -63,7 +71,6 @@ export default {
 }
 
 .contacts--number {
-  margin-top: 18px;
   font-size: 16px;
 }
 
@@ -81,6 +88,13 @@ export default {
   background-color: inherit;
 }
 
+.contacts--delete:hover,
+.contacts--delete:active,
+.contacts--delete:focus {
+  transition: 0.4s;
+  transform: scale(1.2);
+}
+
 .contacts--delete::before,
 .contacts--delete::after {
   content: "";
@@ -95,5 +109,26 @@ export default {
 
 .contacts--delete::after {
   transform: rotate(-45deg);
+}
+
+.contacts--info {
+  display: flex;
+  align-items: center;
+
+  margin-right: auto;
+  margin-left: 40px;
+}
+
+@media (max-width: 600px) {
+  .contacts--info {
+    flex-direction: column;
+    text-align: center;
+    width: 150px;
+    margin-left: 20px;
+  }
+
+  .contacts--info p {
+    margin-top: 0;
+  }
 }
 </style>

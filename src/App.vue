@@ -14,10 +14,15 @@ export default {
 </script>
 
 <style>
+body{
+  margin: 0;
+}
+
 #app {
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-top: 100px;
 }
+
 </style>

@@ -53,6 +53,7 @@ export default {
         alert("Пожалуйста введите имя или номер контакта");
         return;
       }
+      // Получаем id с помощью геттера и увеличиваем на 1 из-за того, что мы получаем велечину массива, а id начинаются с 1
       const id = this.$store.getters.getContactId + 1;
       this.$store.dispatch("createNewContact", {
         name: this.name,
@@ -60,6 +61,7 @@ export default {
         id
       });
 
+      // Сбрасываем состояние формы
       this.isActive = !this.isActive;
       this.name = "";
       this.phone = "";
@@ -93,6 +95,13 @@ export default {
   color: rgb(139, 139, 139);
   border: 0;
   background-color: inherit;
+}
+
+.contacts--add-new:focus,
+.contacts--add-new:hover,
+.contacts--add-new:active {
+  transition: 0.5s;
+  transform: translateX(10px);
 }
 
 .contacts--add-new::before,
@@ -139,10 +148,33 @@ export default {
   margin-right: 20px;
 }
 
+.contacts--input-label input:focus,
+.contacts--input-label input:hover,
+.contacts--input-label input:active {
+  transition: 0.5s;
+  border: 1px solid grey;
+}
+
 .contacts--action-btn button {
   border: 0;
+  user-select: none;
+  cursor: pointer;
   background-color: inherit;
   position: relative;
+}
+
+.action-btn--cancel:hover,
+.action-btn--cancel:active,
+.action-btn--cancel:focus {
+  transition: 0.4s;
+  transform: rotate(180deg);
+}
+
+.action-btn--submit:hover,
+.action-btn--submit:active,
+.action-btn--submit:focus {
+  transition: 0.4s;
+  transform: scale(1.2);
 }
 
 .action-btn--cancel {
@@ -196,5 +228,30 @@ export default {
 
   left: -5px;
   top: 11px;
+}
+
+@media (max-width: 950px) {
+  .contacts--input-label {
+    margin-right: 10px;
+  }
+  .contacts--action-btn {
+    margin-right: 0;
+  }
+  .action-btn--cancel {
+    margin-right: 20px;
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contacts--create-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contacts--action-btn {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
 }
 </style>
