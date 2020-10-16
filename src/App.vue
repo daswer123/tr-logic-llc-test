@@ -25,4 +25,10 @@ body{
   margin-top: 100px;
 }
 
+@media (max-width: 600px) {
+  #app {
+  margin-top: 30px;
+}
+} 
+
 </style>

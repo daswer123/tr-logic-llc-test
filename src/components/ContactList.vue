@@ -72,6 +72,9 @@ export default {
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
+
+    box-shadow: none;
   }
+
 }
 </style>
