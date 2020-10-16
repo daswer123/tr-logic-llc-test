@@ -56,13 +56,14 @@ export default {
         alert("Пожалуйста имя поля или его значение");
         return;
       }
-
-      this.$store.dispatch("createNewField", {
+      
+       this.$store.dispatch("createNewField", {
         contactId: this.contactId,
         fieldName: this.fieldName,
         fieldValue: this.fieldValue
       });
 
+      // Сбрасываем состояние формы
       this.isActive = !this.isActive;
       this.fieldName = "";
       this.fieldValue = "";
