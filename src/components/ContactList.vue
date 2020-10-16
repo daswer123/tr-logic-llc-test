@@ -5,7 +5,8 @@
             <ContactItem
              v-bind:data="contact"
              v-for="contact in getAllContacts"
-             v-bind:key="contact.id" />
+             v-bind:key="contact.id"
+            />
         </ul>
         <h2 class="empty-contact-list" v-else>К сожалению в вашем списке нет контактов</h2>
         <ContactAddNew />

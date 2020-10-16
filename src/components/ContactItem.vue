@@ -1,9 +1,11 @@
 <template>
         <li class="contacts--item">
-            <img class="contacts--img" alt="Contact avatar" :src="data.avatarUrl"/>
-            <h2 class="contacts--name">{{data.name}}</h2>
-            <p class="contacts--number">{{data.phone}}</p>
-            <button @click="deleteContact(data.id)" type="button" class="contacts--delete" >Delete</button>
+            <router-link :to="{path : `/contact/${data.id}`}">
+                <img class="contacts--img" alt="Contact avatar" :src="data.avatarUrl"/>
+                <h2 class="contacts--name">{{data.name}}</h2>
+                <p class="contacts--number">{{data.phone}}</p>
+                <button @click.prevent="deleteContact(data.id)" type="button" class="contacts--delete" >Delete</button>
+            </router-link>
         </li>
 </template>
 
@@ -24,9 +26,11 @@
 
 <style scoped>
 
-    .contacts--item{
+    .contacts--item a{
         width: 800px;
         display: flex;
+        text-decoration: none;
+        color: black;
         align-items: center;
         justify-content: space-between;
         margin-top: 30px;
@@ -35,7 +39,7 @@
         border-bottom: 1px solid rgba(0,0,0, 0.2);
     }
 
-    .contacts--item:last-child{
+    .contacts--item:last-child a{
         border: 0;
     }
 
