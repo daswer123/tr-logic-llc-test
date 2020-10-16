@@ -3,12 +3,11 @@
 </template>
 
 <script>
-import ContactList from "../components/ContactList"
+import ContactList from "../components/ContactList";
 
 export default {
-  
   components: {
     ContactList
   }
-}
+};
 </script>

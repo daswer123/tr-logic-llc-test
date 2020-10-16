@@ -9,8 +9,8 @@ import store from "./store";
 
 export default {
   store,
-  name: 'App',
-}
+  name: "App"
+};
 </script>
 
 <style>
